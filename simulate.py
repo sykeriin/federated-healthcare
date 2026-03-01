@@ -24,7 +24,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from flwr.common import ndarrays_to_parameters
-from flwr.common import Context
+
 
 
 from model import HeartDiseaseModel, get_model_parameters
@@ -72,11 +72,11 @@ TRACKER = TrainingTracker()
 # ─────────────────────────────────────────────────────────────────────────────
 
 def make_client_factory(clinic_datasets, X_test, y_test, use_dp, rank_ratio):
-    """Returns a function that creates a ClinicClient given a client ID."""
 
-    def client_fn(context: Context):
-        cid = int(context.cid)
+    def client_fn(cid: str):
+        clinic_id = int(cid)
         X_train, y_train = clinic_datasets[clinic_id]
+
         return ClinicClient(
             clinic_id=clinic_id,
             X_train=X_train,
@@ -85,10 +85,9 @@ def make_client_factory(clinic_datasets, X_test, y_test, use_dp, rank_ratio):
             y_test=y_test,
             use_dp=use_dp,
             rank_ratio=rank_ratio,
-        ).to_client()
+        )
 
     return client_fn
-
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Instrumented strategy that feeds TRACKER
@@ -115,7 +114,7 @@ class TrackedStrategy(FedProxStrategy):
 
 def launch_live_plot(num_rounds: int):
     """Launch a live matplotlib chart that updates after each round."""
-    matplotlib.use("TkAgg")  # change to "Qt5Agg" if TkAgg not available
+    matplotlib.use("Qt5Agg")  # change to "Qt5Agg" if TkAgg not available
 
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 7))
     fig.suptitle("AMD Rural Healthcare FL — Live Training Dashboard",
