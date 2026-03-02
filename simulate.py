@@ -71,19 +71,17 @@ TRACKER = TrainingTracker()
 # Client factory for Flower simulation
 # ─────────────────────────────────────────────────────────────────────────────
 
-def make_client_factory(clinic_datasets, X_test, y_test, use_dp, rank_ratio):
+def make_client_factory(train_datasets, val_datasets, rank_ratio):
 
     def client_fn(cid: str):
         clinic_id = int(cid)
-        X_train, y_train = clinic_datasets[clinic_id]
+        X_train, y_train = train_datasets[clinic_id]
+        X_val,   y_val   = val_datasets[clinic_id]
 
         return ClinicClient(
             clinic_id=clinic_id,
-            X_train=X_train,
-            y_train=y_train,
-            X_test=X_test,
-            y_test=y_test,
-            use_dp=use_dp,
+            X_train=X_train, y_train=y_train,
+            X_val=X_val,     y_val=y_val,
             rank_ratio=rank_ratio,
         )
 
@@ -130,12 +128,12 @@ def launch_live_plot(num_rounds: int):
         ax.spines["right"].set_visible(False)
 
     ax1.set_xlim(0, num_rounds + 1)
-    ax1.set_ylim(0, 100)
+    ax1.set_ylim(50, 100)
     ax1.set_ylabel("Accuracy (%)", color="white")
     ax1.set_xlabel("Training Round", color="white")
     ax1.set_title("Model Accuracy by Population", color="white")
-    ax1.axhline(y=53, color="#E74C3C", linestyle="--", alpha=0.5,
-                label="Rural baseline (no FL) ~53%")
+    ax1.axhline(y=65, color="#E74C3C", linestyle="--", alpha=0.5,
+                label="Rural no-FL baseline ~65% (majority class)")
     ax1.legend(loc="lower right", facecolor="#1A1A1A", labelcolor="white")
 
     ax2.set_xlim(0, num_rounds + 1)
@@ -227,12 +225,12 @@ def main():
 
     # ── Load & partition data ──
     X, y = load_heart_disease_data()
-    clinic_datasets, (X_test, y_test) = partition_data(
+    train_datasets, val_datasets = partition_data(
         X, y, num_clinics=args.clinics
     )
 
     # ── Initial model parameters ──
-    init_model = HeartDiseaseModel(input_dim=X.shape[1])
+    init_model = HeartDiseaseModel(input_dim=train_datasets[0][0].shape[1])
     init_params = ndarrays_to_parameters(get_model_parameters(init_model))
 
     # ── Strategy ──
@@ -258,10 +256,8 @@ def main():
 
     # ── Client factory ──
     client_fn = make_client_factory(
-        clinic_datasets=clinic_datasets,
-        X_test=X_test,
-        y_test=y_test,
-        use_dp=not args.no_dp,
+        train_datasets=train_datasets,
+        val_datasets=val_datasets,
         rank_ratio=args.rank_ratio,
     )
 

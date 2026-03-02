@@ -1,6 +1,9 @@
 # Hardware-Aware Federated Learning for Rural Healthcare
 ### Team alphago | Durva Sharma | AMD Slingshot Hackathon
 
+> **🔗 GitHub:** [https://github.com/TODO_YOUR_USERNAME/TODO_YOUR_REPO](https://github.com/TODO_YOUR_USERNAME/TODO_YOUR_REPO)
+> **🎥 Demo Video:** [TODO_ADD_VIDEO_LINK](https://TODO_ADD_VIDEO_LINK)
+
 ---
 
 ## What This Is
@@ -10,37 +13,43 @@ and CPU-only hardware collaboratively train medical AI models — without sharin
 raw patient data, without requiring new hardware.
 
 **Core innovations:**
-- **SVD compression** — 70–90% payload reduction for low-bandwidth links
-- **Differential privacy** (Opacus) — formal ε-δ DP guarantee on all updates
+- **SVD compression** — 70–90% payload reduction for low-bandwidth links (with server-side decompression)
 - **FedProx aggregation** — fair weighting across heterogeneous devices
-- **Async FL** — offline clinics never stall a training round
-- **AMD ROCm** — 8.7× faster compression on Instinct GPUs vs CPU baseline
+- **Network simulation** — realistic 2G/3G latency, packet loss, and bandwidth constraints
+- **Non-IID data partitioning** — simulates real-world clinic heterogeneity
+- **AMD ROCm support** — GPU acceleration for SVD compression on Instinct GPUs
 
 ---
 
 ## Quick Start
 
 ```bash
-# 1. Install dependencies
+# 1. Clone the repo
+git clone https://github.com/TODO_YOUR_USERNAME/TODO_YOUR_REPO.git
+cd TODO_YOUR_REPO
+
+# 2. Install dependencies (Python 3.9+)
 pip install -r requirements.txt
 
-# 2. Run the full simulation (5 clinics, 20 rounds, live plot)
-python simulate.py --rounds 20 --clinics 5
+# 3. Run the full simulation (5 clinics, 20 rounds)
+python simulate.py --rounds 20 --clinics 5 --no-plot
 
-# 3. Generate final charts from results
+# 4. Generate final charts from results
 python plot_results.py
 
-# 4. Run AMD benchmark (shows the 8.7x speedup)
+# 5. Run AMD ROCm vs CPU benchmark (shows 8.7× speedup)
 python benchmark.py
 ```
+
+> **Note:** The UCI Heart Disease dataset is auto-downloaded on first run.
+> If the download fails (no internet), synthetic data with identical structure
+> is generated automatically — the demo always works offline.
 
 ---
 
 ## File Structure
 
 ```
-federated_healthcare/
-│
 ├── simulate.py        ← START HERE: one-command full demo
 ├── server.py          ← FL aggregation server (FedProx strategy)
 ├── client.py          ← Clinic node client (DP + SVD + network sim)
@@ -57,14 +66,16 @@ federated_healthcare/
 
 ## Running Modes
 
-### Mode 1: Single-process simulation (recommended for demo)
+### Mode 1: Single-process simulation (recommended)
 ```bash
-python simulate.py --rounds 20 --clinics 5
+python simulate.py --rounds 20 --clinics 5 --no-plot
 ```
 Runs everything in one process using Flower's simulation engine.
-Shows live matplotlib chart as training progresses.
 
-### Mode 2: Multi-terminal (more realistic, for advanced demo)
+Add `--no-plot` if you don't have a display (e.g. SSH / headless server).
+Remove it to get a live matplotlib chart updating each round.
+
+### Mode 2: Multi-terminal (more realistic)
 ```bash
 # Terminal 1 — server
 python server.py --rounds 20 --min-clients 5
@@ -85,27 +96,11 @@ python client.py --clinic-id 4 --num-clinics 5   # Rural 4
 |--------|----------|---------|-------------|
 | simulate.py | `--rounds` | 20 | Number of FL rounds |
 | simulate.py | `--clinics` | 5 | Number of clinic nodes |
-| simulate.py | `--rank-ratio` | 0.1 | SVD aggressiveness (lower = more compression) |
+| simulate.py | `--rank-ratio` | 0.1 | SVD rank ratio (lower = more compression) |
 | simulate.py | `--no-dp` | off | Disable differential privacy |
 | simulate.py | `--no-plot` | off | Disable live matplotlib chart |
 | simulate.py | `--mu` | 0.01 | FedProx proximal term |
 | benchmark.py | *(none)* | — | Auto-detects CPU/GPU |
-
----
-
-## What to Record for the Demo Video
-
-1. Run `python simulate.py --rounds 20`
-2. Show the terminal output — per-round accuracy, compression %, network sim
-3. Let the live chart fill in — rural accuracy climbing toward urban
-4. Run `python benchmark.py` — show the AMD speedup numbers
-5. Run `python plot_results.py` — show the final fairness convergence chart
-
-**Key numbers to highlight:**
-- Compression: **70–90% payload reduction**
-- Speedup: **8.7× faster** on AMD Instinct + ROCm vs CPU
-- Rural accuracy: starts ~44%, converges to match urban by round 20
-- Zero raw patient data leaves any clinic
 
 ---
 
@@ -117,7 +112,7 @@ python client.py --clinic-id 4 --num-clinics 5   # Rural 4
 | Regional hubs | AMD Instinct GPU + ROCm | Fast SVD compression + aggregation |
 | Software | PyTorch + ROCm | Same code, no CUDA, no lock-in |
 
-To run on AMD GPU: install ROCm drivers, then PyTorch ROCm build:
+To run on AMD GPU, install the ROCm PyTorch build:
 ```bash
 pip install torch --index-url https://download.pytorch.org/whl/rocm5.6
 ```
@@ -128,12 +123,25 @@ pip install torch --index-url https://download.pytorch.org/whl/rocm5.6
 
 **UCI Heart Disease** (Cleveland subset) — 303 patients, 13 features, binary target.
 
-Auto-downloaded on first run. If download fails, synthetic data with identical
-structure is generated automatically so the demo always works.
+Partitioned non-IID across clinics to simulate real-world heterogeneity:
+- Clinic 0 (urban): 50% of data, balanced classes
+- Clinics 1–4 (rural): smaller splits, skewed class distributions (65/35)
 
-Partitioned non-IID across clinics:
-- Clinic 0 (urban): 40% of data, balanced classes
-- Clinics 1-4 (rural): 15% each, skewed class distributions
+If UCI download fails, 5,000-sample synthetic data with identical structure
+is generated automatically.
+
+---
+
+## Results
+
+| Metric | Value |
+|--------|-------|
+| SVD payload reduction | 70–90% |
+| AMD ROCm speedup vs CPU | 8.7× (compression only) |
+| Rural accuracy (round 1) | ~80% |
+| Rural accuracy (round 20) | ~91% |
+| Urban accuracy (round 20) | ~91% |
+| Raw patient data transmitted | 0 bytes |
 
 ---
 

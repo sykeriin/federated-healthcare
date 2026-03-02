@@ -50,11 +50,22 @@ class FedProxStrategy(fl.server.strategy.FedAvg):
         if not results:
             return None, {}
 
-        # Extract weights and metrics
-        weights_results = [
-            (parameters_to_ndarrays(fit_res.parameters), fit_res.num_examples)
-            for _, fit_res in results
-        ]
+        # Import decompression function
+        from compression import decompress_model_update
+
+        # Extract weights and metrics — decompress if needed
+        weights_results = []
+        for _, fit_res in results:
+            params = parameters_to_ndarrays(fit_res.parameters)
+
+            # Check if params are compressed (list of tuples with tags)
+            # Compressed format: [("svd", (U, S, Vh, shape)), ("raw", array), ...]
+            # Uncompressed format: [array, array, ...]
+            if params and isinstance(params[0], tuple) and len(params[0]) == 2:
+                # Compressed — decompress it
+                params = decompress_model_update(params)
+
+            weights_results.append((params, fit_res.num_examples))
 
         # Weighted average (FedAvg base)
         aggregated = self._weighted_average(weights_results)

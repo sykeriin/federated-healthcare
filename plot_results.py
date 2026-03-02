@@ -33,7 +33,7 @@ def plot_accuracy_convergence(data: dict):
     rural_acc = data["rural_acc"]
 
     # Rural baseline (no FL) — flat reference line
-    baseline = [53.0] * len(rounds)
+    baseline = [65.0] * len(rounds)  # majority-class accuracy on 75%-positive rural val
 
     fig, ax = plt.subplots(figsize=(11, 6))
     fig.patch.set_facecolor("#0D0D0D")
@@ -45,7 +45,7 @@ def plot_accuracy_convergence(data: dict):
 
     # Baseline
     ax.plot(rounds, baseline, color="#E74C3C", linewidth=1.5,
-            linestyle="--", alpha=0.7, label="Rural — No FL (baseline ~53%)")
+            linestyle="--", alpha=0.7, label="Rural — No FL baseline (majority class ~65%)")
 
     # Urban line
     ax.plot(rounds, urban_acc, color="#3399FF", linewidth=2.5,
@@ -61,14 +61,22 @@ def plot_accuracy_convergence(data: dict):
 
     # Annotations
     if len(rounds) >= 1:
+        improvement = rural_acc[-1] - rural_acc[0]
         ax.annotate(
-            f"  Gap closing: {urban_acc[-1]-rural_acc[-1]:.1f}%",
+            f"  Rural +{improvement:.1f}% improvement",
+            xy=(rounds[-1], rural_acc[-1]),
+            xytext=(rounds[-1] - 4, rural_acc[-1] - 4),
+            fontsize=10, color="#E8550A", fontweight="bold",
+            arrowprops=dict(arrowstyle="->", color="#E8550A", lw=1.5)
+        )
+        ax.annotate(
+            f"  Final gap: {abs(urban_acc[-1]-rural_acc[-1]):.1f}%",
             xy=(rounds[-1], (urban_acc[-1] + rural_acc[-1]) / 2),
-            fontsize=10, color="white", fontweight="bold"
+            fontsize=9, color="#AAAAAA"
         )
 
     ax.set_xlim(min(rounds) - 0.5, max(rounds) + 0.5)
-    ax.set_ylim(30, 105)
+    ax.set_ylim(50, 102)
     ax.set_xlabel("Training Rounds", color="white", fontsize=12)
     ax.set_ylabel("Accuracy (%)", color="white", fontsize=12)
     ax.set_title(

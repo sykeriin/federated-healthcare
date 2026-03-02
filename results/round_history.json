@@ -2,161 +2,161 @@
   {
     "round": 1,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 46.666666666666664,
-    "rural_accuracy": 46.666666666666664,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 81.49078726968175,
+    "rural_accuracy": 79.0310826384652,
+    "accuracy_gap": 2.459704631216553
   },
   {
     "round": 2,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 53.333333333333336,
-    "rural_accuracy": 53.333333333333336,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 84.17085427135679,
+    "rural_accuracy": 80.92332723205206,
+    "accuracy_gap": 3.247527039304728
   },
   {
     "round": 3,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 46.666666666666664,
-    "rural_accuracy": 46.666666666666664,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.25963149078727,
+    "rural_accuracy": 83.10961968680091,
+    "accuracy_gap": 2.1500118039863594
   },
   {
     "round": 4,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 53.333333333333336,
-    "rural_accuracy": 53.333333333333336,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.00837520938023,
+    "rural_accuracy": 82.56304657311368,
+    "accuracy_gap": 2.4453286362665523
   },
   {
     "round": 5,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 53.333333333333336,
-    "rural_accuracy": 53.333333333333336,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.25963149078727,
+    "rural_accuracy": 83.86380584367161,
+    "accuracy_gap": 1.3958256471156574
   },
   {
     "round": 6,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 46.666666666666664,
-    "rural_accuracy": 46.666666666666664,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 84.50586264656617,
+    "rural_accuracy": 84.1180258965494,
+    "accuracy_gap": 0.3878367500167741
   },
   {
     "round": 7,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 46.666666666666664,
-    "rural_accuracy": 46.666666666666664,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.5108877721943,
+    "rural_accuracy": 85.50521998508576,
+    "accuracy_gap": 0.005667787108535549
   },
   {
     "round": 8,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 46.666666666666664,
-    "rural_accuracy": 46.666666666666664,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.678391959799,
+    "rural_accuracy": 85.2942173411972,
+    "accuracy_gap": 0.38417461860180424
   },
   {
     "round": 9,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 53.333333333333336,
-    "rural_accuracy": 53.333333333333336,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.17587939698493,
+    "rural_accuracy": 85.12643210629788,
+    "accuracy_gap": 0.049447290687041345
   },
   {
     "round": 10,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 46.666666666666664,
-    "rural_accuracy": 46.666666666666664,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 84.84087102177554,
+    "rural_accuracy": 84.37055114907463,
+    "accuracy_gap": 0.47031987270091236
   },
   {
     "round": 11,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 46.666666666666664,
-    "rural_accuracy": 46.666666666666664,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.17587939698493,
+    "rural_accuracy": 84.83238424513591,
+    "accuracy_gap": 0.34349515184901236
   },
   {
     "round": 12,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 46.666666666666664,
-    "rural_accuracy": 46.666666666666664,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 84.92462311557789,
+    "rural_accuracy": 84.20276591417532,
+    "accuracy_gap": 0.721857201402571
   },
   {
     "round": 13,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 50.0,
-    "rural_accuracy": 50.0,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.09212730318258,
+    "rural_accuracy": 84.37224594942717,
+    "accuracy_gap": 0.7198813537554116
   },
   {
     "round": 14,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 53.333333333333336,
-    "rural_accuracy": 53.333333333333336,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.59463986599664,
+    "rural_accuracy": 84.41376855806385,
+    "accuracy_gap": 1.1808713079327902
   },
   {
     "round": 15,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 53.333333333333336,
-    "rural_accuracy": 53.333333333333336,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.25963149078727,
+    "rural_accuracy": 85.75944003796353,
+    "accuracy_gap": -0.4998085471762579
   },
   {
     "round": 16,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 53.333333333333336,
-    "rural_accuracy": 53.333333333333336,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.09212730318258,
+    "rural_accuracy": 85.84418005558945,
+    "accuracy_gap": -0.7520527524068683
   },
   {
     "round": 17,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 53.333333333333336,
-    "rural_accuracy": 53.333333333333336,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.42713567839196,
+    "rural_accuracy": 86.01196529048877,
+    "accuracy_gap": -0.5848296120968115
   },
   {
     "round": 18,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 53.333333333333336,
-    "rural_accuracy": 53.333333333333336,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 86.18090452261306,
+    "rural_accuracy": 86.1382279167514,
+    "accuracy_gap": 0.04267660586165789
   },
   {
     "round": 19,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 53.333333333333336,
-    "rural_accuracy": 53.333333333333336,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.09212730318258,
+    "rural_accuracy": 84.83577384584096,
+    "accuracy_gap": 0.25635345734161774
   },
   {
     "round": 20,
     "n_clients": 5,
-    "avg_compression": 77.64378478664193,
-    "urban_accuracy": 53.333333333333336,
-    "rural_accuracy": 53.333333333333336,
-    "accuracy_gap": 0.0
+    "avg_compression": 78.48218417399352,
+    "urban_accuracy": 85.678391959799,
+    "rural_accuracy": 86.01027049013626,
+    "accuracy_gap": -0.33187853033726356
   }
 ]
